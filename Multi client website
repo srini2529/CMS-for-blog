@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Service Marketplace</title>
+</head>
+<body>
+  <h2>Add Service</h2>
+  <input id="name" placeholder="Service Name">
+  <input id="price" placeholder="Price">
+  <button onclick="addService()">Add</button>
+
+  <h2>Available Services</h2>
+  <ul id="list"></ul>
+
+  <script>
+    let services = JSON.parse(localStorage.getItem("services")) || [];
+
+    function addService() {
+      services.push({
+        name: name.value,
+        price: price.value
+      });
+      localStorage.setItem("services", JSON.stringify(services));
+      render();
+    }
+
+    function render() {
+      list.innerHTML = "";
+      services.forEach(s =>
+        list.innerHTML += `<li>${s.name} - ₹${s.price}</li>`
+      );
+    }
+    render();
+  </script>
+</body>
+</html>m
