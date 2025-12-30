@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grocery App</title>
+</head>
+<body>
+  <h2>Add Grocery Item</h2>
+  <input id="item" placeholder="Item">
+  <input id="qty" placeholder="Quantity">
+  <button onclick="add()">Add</button>
+
+  <h2>Cart</h2>
+  <ul id="cart"></ul>
+
+  <script>
+    let groceries = JSON.parse(localStorage.getItem("groceries")) || [];
+
+    function add() {
+      groceries.push({ item: item.value, qty: qty.value });
+      localStorage.setItem("groceries", JSON.stringify(groceries));
+      render();
+    }
+
+    function render() {
+      cart.innerHTML = "";
+      groceries.forEach(g =>
+        cart.innerHTML += `<li>${g.item} - ${g.qty}</li>`
+      );
+    }
+    render();
+  </script>
+</body>
+</html>
